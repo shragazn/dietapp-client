@@ -1,16 +1,17 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "react-router";
 import "./App.css";
 import { ThemeProvider } from "./components/theme-provider";
-import Routes from "./routes/routes";
+import router, { queryClient } from "./routes/routes";
 
 function App() {
   return (
     <div className="h-screen w-full">
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <Router>
-          <Routes />
-        </Router>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </QueryClientProvider>
     </div>
   );
 }
